@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b13">
+  <title>BioSentinel — Agent Runtime Security</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+  <script src="/live.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#overview" aria-label="BioSentinel home">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span class="brand-copy"><strong>bio<span>sentinel</span></strong><small>AGENT SECURITY SYSTEM</small></span>
+      </a>
+
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <a class="nav-link active" href="#overview"><span class="nav-icon">◈</span><span>Overview</span><span class="nav-dot"></span></a>
+        <a class="nav-link" href="#threat-lab"><span class="nav-icon">⌁</span><span>Threat lab</span></a>
+        <a class="nav-link" href="#evidence"><span class="nav-icon">▤</span><span>Evidence center</span></a>
+        <a class="nav-link" href="#attack-lab"><span class="nav-icon">⌖</span><span>Attack lab</span></a>
+      </nav>
+
+      <div class="sidebar-divider"></div>
+      <div class="workspace-label">SYSTEM</div>
+      <nav class="nav-list" aria-label="System navigation">
+        <a class="nav-link" href="#activity"><span class="nav-icon">◷</span><span>Activity log</span></a>
+        <a class="nav-link" href="#system-status"><span class="nav-icon">⚙</span><span>System status</span></a>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-agent-card">
+        <div class="agent-card-top"><span class="pulse-dot"></span><span>LOCAL ENVIRONMENT</span></div>
+        <strong id="sidebarApiStatus">Connecting to API</strong>
+        <small>FastAPI · Demo workspace</small>
+        <div class="mini-meter"><span id="apiMeter"></span></div>
+      </div>
+      <div class="profile-row">
+        <div class="avatar">BS</div>
+        <div class="profile-copy"><strong>Security operator</strong><small>Personal workspace</small></div>
+        <span class="profile-menu">···</span>
+      </div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Toggle navigation">☰</button>
+        <div class="breadcrumb"><span>Workspace</span><span class="crumb-slash">/</span><strong>Overview</strong></div>
+        <div class="topbar-right">
+          <span class="environment-chip"><span class="pulse-dot"></span> LOCAL DEMO</span>
+          <span class="topbar-separator"></span>
+          <span class="topbar-time" id="clock">--:--:--</span>
+          <div class="top-avatar">BS</div>
+        </div>
+      </header>
+
+      <section class="page-intro">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> RUNTIME INTELLIGENCE / 001</div>
+          <h1>See the signal.<br><span>Stop the threat.</span></h1>
+          <p class="intro-copy">Behavioral monitoring and forensic investigation for AI agents — from first anomaly to containment.</p>
+        </div>
+        <div class="intro-status">
+          <div class="status-orbit">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="orbit-core"><span>BS</span></div>
+            <i class="orbit-point point-one"></i>
+            <i class="orbit-point point-two"></i>
+            <i class="orbit-point point-three"></i>
+          </div>
+          <div class="orbit-caption"><span class="pulse-dot"></span> SENTINEL READY</div>
+        </div>
+      </section>
+
+      <section class="metric-grid" aria-label="Security overview">
+        <article class="metric-card">
+          <div class="metric-heading"><span>MONITORED RUN</span><span class="metric-icon cyan">⌁</span></div>
+          <div class="metric-value" id="metricRun">—</div>
+          <div class="metric-foot"><span class="tiny-square cyan-bg"></span><span id="metricScenario">Awaiting simulation</span></div>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><span>DETECTION STATE</span><span class="metric-icon violet">◉</span></div>
+          <div class="metric-value state-value" id="metricState">STANDBY</div>
+          <div class="metric-foot"><span class="tiny-square violet-bg"></span><span id="metricStateHint">Run a scenario to inspect</span></div>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><span>QUARANTINE</span><span class="metric-icon coral">⛨</span></div>
+          <div class="metric-value" id="metricQuarantine">—</div>
+          <div class="metric-foot"><span class="tiny-square coral-bg"></span><span id="metricQuarantineHint">No run selected</span></div>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><span>DETECTION LEAD</span><span class="metric-icon lime">↗</span></div>
+          <div class="metric-value" id="metricLead">—</div>
+          <div class="metric-foot"><span class="tiny-square lime-bg"></span><span>Steps before containment</span></div>
+        </article>
+      </section>
+
+      <section class="content-grid" id="threat-lab">
+        <article class="panel threat-panel">
+          <div class="panel-heading">
+            <div><div class="section-kicker">01 / SIMULATION</div><h2>Threat lab</h2><p>Choose a scenario to observe the runtime response.</p></div>
+            <span class="panel-symbol">✳</span>
+          </div>
+          <div class="scenario-list" id="scenarioList">
+            <button class="scenario-card selected" data-scenario="prompt_leak">
+              <span class="scenario-symbol symbol-violet">⌘</span>
+              <span class="scenario-info"><strong>Prompt disclosure</strong><small>System prompt · Context leak</small></span>
+              <span class="scenario-arrow">↗</span>
+            </button>
+            <button class="scenario-card" data-scenario="obfuscated_rce">
+              <span class="scenario-symbol symbol-coral">⌁</span>
+              <span class="scenario-info"><strong>Obfuscated execution</strong><small>Encoded payload · RCE pattern</small></span>
+              <span class="scenario-arrow">↗</span>
+            </button>
+            <button class="scenario-card" data-scenario="poisoned_dependency">
+              <span class="scenario-symbol symbol-cyan">⟡</span>
+              <span class="scenario-info"><strong>Poisoned dependency</strong><small>Supply chain · Secret exposure</small></span>
+              <span class="scenario-arrow">↗</span>
+            </button>
+            <button class="scenario-card" data-scenario="weak_key_gatekeeper">
+              <span class="scenario-symbol symbol-lime">⌑</span>
+              <span class="scenario-info"><strong>Weak-key gatekeeper</strong><small>Guessable key · Access misuse</small></span>
+              <span class="scenario-arrow">↗</span>
+            </button>
+          </div>
+          <div class="simulation-options">
+            <label class="toggle-wrap" for="stealth">
+              <span class="toggle-copy"><strong>Stealth mode</strong><small>Skip gradual drift before breach</small></span>
+              <input type="checkbox" id="stealth">
+              <span class="toggle-ui"></span>
+            </label>
+            <button class="run-button" id="runButton">
+              <span class="run-button-icon">▶</span>
+              <span id="runButtonText">Run simulation</span>
+              <span class="button-arrow">↗</span>
+            </button>
+          </div>
+          <div class="run-error" id="runError" role="alert" hidden></div>
+        </article>
+
+        <article class="panel trajectory-panel" id="activity">
+          <div class="panel-heading">
+            <div><div class="section-kicker">02 / BEHAVIORAL TELEMETRY</div><h2>Detection trajectory</h2><p>Behavioral score and containment state across steps.</p></div>
+            <span class="live-label"><span class="pulse-dot"></span> LIVE VIEW</span>
+          </div>
+          <div class="chart-legend">
+            <span><i class="legend-dot healthy-dot"></i>Healthy</span>
+            <span><i class="legend-dot watch-dot"></i>Watch</span>
+            <span><i class="legend-dot quarantine-dot"></i>Quarantined</span>
+          </div>
+          <div class="trajectory-chart" id="trajectoryChart">
+            <div class="chart-empty"><div class="empty-wave">〰</div><strong>Awaiting telemetry</strong><span>Run a simulation to populate the timeline.</span></div>
+          </div>
+          <div class="chart-axis"><span>START OF RUN</span><span id="chartStepCount">0 STEPS</span><span>CONTAINMENT →</span></div>
+          <div class="trajectory-summary">
+            <div><span class="summary-label">FIRST WARNING</span><strong id="firstWarning">—</strong></div>
+            <div><span class="summary-label">BREACH POINT</span><strong id="breachPoint">—</strong></div>
+            <div><span class="summary-label">QUARANTINED</span><strong id="quarantinePoint">—</strong></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="content-grid lower-grid single" id="evidence">
+        <article class="panel evidence-panel">
+          <div class="panel-heading">
+            <div><div class="section-kicker">03 / FORENSICS</div><h2>Investigation report</h2><p>Evidence-backed findings from the selected run.</p></div>
+            <span class="report-tag" id="reportTag">NO REPORT</span>
+          </div>
+          <div class="report-meta" id="reportMeta"><span class="report-dot"></span><span>Run a scenario to generate a forensic report.</span></div>
+          <div
+            class="report-content"
+            id="reportContent"
+            aria-live="polite"
+          >
+            Run a simulation to generate a forensic report.
+          </div>
+          <div class="report-actions">
+            <button class="secondary-button" id="copyReport" disabled>▣ Copy report</button>
+            <button class="secondary-button" id="downloadReport" disabled>↓ Export .md</button>
+          </div>
+        </article>
+
+      </section>
+
+      <section class="attack-section" id="attack-lab">
+        <article class="panel attack-panel">
+          <div class="panel-heading">
+            <div>
+              <div class="section-kicker">04 / ATTACK LAB</div>
+              <h2>Attack a sandboxed agent, live</h2>
+              <p>A mock website plants hostile text. Run the same attack with BioSentinel off, then on, or type your own.</p>
+            </div>
+            <span class="panel-symbol">⌖</span>
+          </div>
+
+          <div class="model-strip">
+            <div class="model-chip"><strong>Agent model</strong><small>Muse Spark Open</small><span class="integration-state pending" id="agentModelStatus">Checking</span></div>
+            <div class="model-chip"><strong>Report model</strong><small>Optional, falls back to template</small><span class="integration-state pending" id="auditorModelStatus">Checking</span></div>
+            <div class="model-chip"><strong>Telemetry</strong><small>DuckDB, local</small><span class="integration-state verified" id="telemetryStatus">Local engine</span></div>
+            <button class="secondary-button" id="testModels" type="button">Test models</button>
+          </div>
+          <p class="model-note">Chips show configuration until you press Test models, which makes one real call. The scripted agent in the lab is a stand-in, not a model.</p>
+
+          <div id="attack-lab-mount"></div>
+        </article>
+      </section>
+
+      <section class="system-strip" id="system-status">
+        <div class="system-strip-icon">⌬</div>
+        <div class="system-strip-copy"><strong>Local runtime</strong><span id="systemMessage">Checking API connectivity…</span></div>
+        <div class="system-strip-right"><span class="pulse-dot" id="systemDot"></span><span id="systemState">CHECKING</span></div>
+      </section>
+      <footer class="footer"><span>BIOSENTINEL <span class="footer-version">/ 0.1.0</span></span><span>BUILT FOR AGENT RESILIENCE <span class="footer-star">✳</span></span></footer>
+    </main>
+  </div>
+
+  <button class="help-launcher" id="helpLauncher" aria-expanded="false" aria-controls="helpPanel">
+    <span class="help-spark">✳</span><span>How may I help you?</span><span class="help-shortcut">↗</span>
+  </button>
+  <section class="help-panel" id="helpPanel" aria-label="BioSentinel help" hidden>
+    <div class="help-panel-head">
+      <div><span class="section-kicker">SENTINEL ASSIST</span><h3>What do you need?</h3></div>
+      <button class="help-close" id="helpClose" aria-label="Close help">×</button>
+    </div>
+    <p class="help-description">Quick actions for exploring the current demo.</p>
+    <button class="help-action" data-help="prompt_leak"><span>⌘</span><span><strong>Simulate prompt disclosure</strong><small>Inspect an injection-style scenario</small></span><b>↗</b></button>
+    <button class="help-action" data-help="obfuscated_rce"><span>⌁</span><span><strong>Explore a threat timeline</strong><small>See how detection state changes</small></span><b>↗</b></button>
+    <button class="help-action" data-help="evidence"><span>▤</span><span><strong>Understand the evidence</strong><small>Jump to the forensic report</small></span><b>↗</b></button>
+    <div class="help-foot"><span class="pulse-dot"></span> Demo assistant · Actions run locally</div>
+  </section>
+</body>
+</html>
